@@ -40,16 +40,19 @@ switch ($view) {
         $id_prod = $_GET['id'];
         add_to_cart($id_prod);
         $_SESSION['total_items'] = total_items($_SESSION['cart']);
+        $_SESSION['total_price'] = total_price($_SESSION['cart']);
         //readresser la page là ou on a été. -->à retravailler pour les pages cat/index/prod + les num pages 
         header('Location: index.php?view=product&id=' . $id_prod);
         break;
     case('update_cart'):
         update_cart();
         $_SESSION['total_items'] = total_items($_SESSION['cart']);
+        $_SESSION['total_price'] = total_price($_SESSION['cart']);
         header('Location: index.php?view=cart');
         break;
 }
 
+//protection
 $arr = array('index','cat', 'product','cart', 'add_to_cart', 'update_cart');
 if(!in_array($view, $arr)) die ("ERROR 404<br>Cette adrese n'existe pas...!!! o_O");
 

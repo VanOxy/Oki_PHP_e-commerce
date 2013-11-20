@@ -63,7 +63,7 @@ function get_categories() {
 
 function get_product($id_prod) {
     $connection = db_connect();
-    $query = "SELECT * FROM products WHERE id_prod = '" . $id_prod . "'";
+    $query = "SELECT * FROM products WHERE id_prod = '$id_prod'";
     try {
         $result = $connection->query($query);
         $row = $result->fetch(PDO::FETCH_ASSOC);

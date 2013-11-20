@@ -23,7 +23,6 @@
 }
 #cart_div{
     margin-top: -38px;
-    
 }
 #cart_img{
     height: 40px;
@@ -33,4 +32,7 @@
     font-weight: 600;
     color: #fff;
     text-decoration: none;
+}
+#cart_total_price_lbl{
+    margin-top: -5px;
 }

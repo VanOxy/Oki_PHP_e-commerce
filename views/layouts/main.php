@@ -15,6 +15,7 @@
         <!-- header with search-->
         <div class="navbar navbar-static-top">
             <div class="navbar-inner row" style="background:white;border:0px;">
+                <!-- LOGO -->
                 <div class="nav pull-left span3">
                     <a href="index.php?view=index">
                         <img class="topSpace" src='images/logo.png'>
@@ -37,7 +38,7 @@
             </div>
         </div>
 
-        <!-- Le menu navigation -->
+        <!-- NAVIGATION -->
         <div class ="navbar navbar-static-top navbar-inverse">
             <div class="navbar-inner"> 
                 <div class="container">
@@ -52,9 +53,10 @@
                         </ul>
                     </nav>
                 </div>
+                <!-- PANIER -->
                 <a href="index.php?view=cart">
                     <div class="pull-right" id="cart_div">
-                        <span id="cart_text">Panier (<?= $_SESSION['total_items'] ?>) - <?=$view?></span>
+                        <span id="cart_text">Panier (<?= $_SESSION['total_items'] ?>)  -  <?= number_format($_SESSION['total_price'],2)?> €</span>
                         <img src="images/basket2.png" id="cart_img">
                     </div>
                 </a>

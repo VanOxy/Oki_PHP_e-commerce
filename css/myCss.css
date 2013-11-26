@@ -21,6 +21,15 @@
     height: 160px; 
     margin-top: 5px;
 }
+#thumbnail_btn{
+    margin-left:23px; 
+    background:#235E87;
+    margin-bottom: 3px;
+}
+#thumbnail_btn_details{
+    margin-left:35px;
+    margin-bottom: 3px;
+}
 #cart_div{
     margin-top: -38px;
 }
@@ -36,3 +45,18 @@
 #cart_total_price_lbl{
     margin-top: -5px;
 }
+#cart_refresh{
+    color: #fff;
+    background:#235E87;
+    text-shadow: 0 0 0;
+    margin-top: -5px;
+    margin-left: 5px;
+}
+#cart_clear{
+    margin-top: -5px;
+    margin-left: 15px;
+}
+#cart_commander{
+    margin-left: 5px;
+}
+

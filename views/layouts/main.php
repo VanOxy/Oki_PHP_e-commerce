@@ -33,7 +33,7 @@
                 </div>
                 <ul class="nav pull-right">
                     <li class="topSpace"><a href="#" id="reg_sign">Register</a></li>
-                    <li class="topSpace"><a href="sign.php" id="reg_sign">Sign In</a></li>
+                    <li class="topSpace"><a href="#" id="reg_sign">Sign In</a></li>
                 </ul>
             </div>
         </div>
@@ -45,10 +45,10 @@
                     <nav class="row">
                         <ul class="nav nav-pills" id="nav">
                             <?php
-                            $categories = get_categories();
+                            $categories = get_categories($connection);
                             foreach ($categories as $row) {
                                 ?>
-                                <li><a href = "index.php?view=cat&id=<?= $row['cat_id'] ?>"><?= $row['name'] ?></a></li>
+                                <li><a href = "index.php?view=cat&id=<?= $row['cat_id'] ?>&page=1"><?= $row['name'] ?></a></li>
                             <?php } ?>
                         </ul>
                     </nav>
@@ -56,8 +56,8 @@
                 <!-- PANIER -->
                 <a href="index.php?view=cart">
                     <div class="pull-right" id="cart_div">
-                        <span id="cart_text">Panier (<?= $_SESSION['total_items'] ?>)  -  <?= number_format($_SESSION['total_price'],2)?> €</span>
-                        <img src="images/basket2.png" id="cart_img">
+                        <span id="cart_text">Panier (<?= $_SESSION['total_items'] ?>)  -  <?= number_format($_SESSION['total_price'], 2) ?> €</span>
+                        <img src="images/basket.png" id="cart_img">
                     </div>
                 </a>
             </div>
@@ -80,5 +80,6 @@
     </body>
 </html>
 <?php
+//fermer la connection
 exit();
 ?>

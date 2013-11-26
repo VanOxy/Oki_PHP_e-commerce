@@ -18,51 +18,39 @@ function db_connect() {
     return $connection;
 }
 
-function get_products_as_array() {
+function exec_query($query, $connection){
+    try {
+        $result = $connection->query($query); //obj PDO
+        $res_array = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $res_array;
+    } catch (PDOException $ex) {
+        echo $ex->getMessage();
+        exit();
+    }
+}
+
+function get_products_as_array($connection, $currentPage, $perPage) {
     // selectionner tt les produits de la bd produits
     // et retourner sous la forme d'un tableau
-    $connection = db_connect();
-    $query = 'SELECT id_prod, title, price, img FROM products';
-    try {
-        $result = $connection->query($query); //obj PDO
-        $res_array = $result->fetchAll(PDO::FETCH_ASSOC);
-        return $res_array;
-    } catch (PDOException $ex) {
-        echo $ex->getMessage();
-        exit();
-    }
+    $query = "SELECT id_prod, title, price, img FROM products LIMIT "
+            . (($currentPage - 1) * $perPage) . ",$perPage";
+    return exec_query($query, $connection);
 }
 
-function get_cat($cat) {
+function get_products_by_cat($cat, $connection, $currentPage, $perPage) {
     // on recupere la categoie qui a été selectioné dans la barre de navigation par l'utilisateur
-    $connection = db_connect();
-    $query = "SELECT id_prod, title, price, img FROM products WHERE categorie='$cat'";
-    try {
-        $result = $connection->query($query); //obj PDO
-        $res_array = $result->fetchAll(PDO::FETCH_ASSOC);
-        return $res_array;
-    } catch (PDOException $ex) {
-        echo $ex->getMessage();
-        exit();
-    }
+    $query = "SELECT id_prod, title, price, img, categorie FROM products 
+        WHERE categorie='$cat' LIMIT " . (($currentPage - 1) * $perPage) . ",$perPage";
+    return exec_query($query, $connection);
 }
 
-function get_categories() {
+function get_categories($connection) {
     //on selectionne les categories de la base de données pour crées la navigation
-    $connection = db_connect();
     $query = 'SELECT * FROM categories';
-    try {
-        $result = $connection->query($query); //obj PDO
-        $res_array = $result->fetchAll(PDO::FETCH_ASSOC);
-        return $res_array;
-    } catch (PDOException $ex) {
-        echo $ex->getMessage();
-        exit();
-    }
+    return exec_query($query, $connection);
 }
 
-function get_product($id_prod) {
-    $connection = db_connect();
+function get_product($id_prod, $connection) {
     $query = "SELECT * FROM products WHERE id_prod = '$id_prod'";
     try {
         $result = $connection->query($query);
@@ -73,4 +61,31 @@ function get_product($id_prod) {
     }
     return $row;
 }
+
+function get_product_cart($id_prod, $connection) {
+    $query = "SELECT id_prod, title, price FROM products WHERE id_prod = '$id_prod'";
+    try {
+        $result = $connection->query($query);
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $ex) {
+        echo $ex->getMessage();
+        exit();
+    }
+    return $row;
+}
+
+function get_nb_art_all($connection) {
+    $query = "SELECT COUNT(id_prod) AS nbrArt FROM products";
+    $data = exec_query($query, $connection);
+    $data = $data[0];   //on recupere le massif 0
+    return $data['nbrArt']; //on recupere la val
+}
+
+function get_nb_art_by_cat($connection, $cat) {
+    $query = "SELECT COUNT(id_prod) AS nbrArt FROM products WHERE categorie='$cat'";
+    $data = exec_query($query, $connection);
+    $data = $data[0];   //on recupere le massif 0
+    return $data['nbrArt']; //on recupere la val
+}
+
 ?>

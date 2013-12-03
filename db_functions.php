@@ -91,17 +91,17 @@ function get_nb_art_by_cat($connection, $cat) {
 function check_user($connection, $login, $password){
     $query = "SELECT COUNT(id_client) AS client FROM clients WHERE email = '".$login."' AND password = '".$password."'";
     $data = exec_query($query, $connection);
-    var_dump($data);
-    die();
-    if($data == 1)
-        return TRUE;
-    else
-        return FALSE;
+    $data = $data[0];
+    if($data['client'] == 1){
+        return true;
+    }else{
+        return false;
+    }
 }
 
-function get_username($connecion, $login){
+function get_username($connection, $login){
     $query = "SELECT prenom FROM clients WHERE email = '".$login."'";
     $data = exec_query($query, $connection);
-    return $data;
+    return $data[0]['prenom'];
 }
 ?>

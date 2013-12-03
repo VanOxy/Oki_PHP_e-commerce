@@ -52,28 +52,50 @@
                                 S'authentifier
                             </a>
                         </li>
-                        <!-- MODAL LOGIN/REGISTRATION WINDOW -->
+                        <!-- MODAL LOGIN/REGISTRATION WINDOW HIDE-->
                         <form method="POST" action="index.php?view=login" accept-charset="UTF-8">
-                            <div class="modal hide fade" id="regModal">
-                                <div class="modal-header">
-                                    <button class="close" data-dismiss="modal">&times;</button>
-                                    <h3> Authentification </h3>
+                            <?php if (!isset($_GET['login'])) { ?>
+                                <div id="regModal" class="modal hide fade">
+                                    <div class="modal-header">
+                                        <button class="close" data-dismiss="modal">&times;</button>
+                                        <h3> Authentification </h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="text" class="span4" placeholder="E-mail" name="login">
+                                        <input type="password" class="span4" placeholder="Password" name="password">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="#" class="pull-left" id="login_newUser">New User</a>
+                                        <button type="submit" name="submit" class="btn btn-success">Login</button>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <input type="text" class="span4" placeholder="E-mail" name="login"
-                                           <?php if (isset($_POST['login'])) echo $_POST['login'] ?>>
-                                    <input type="password" class="span4" placeholder="Password" name="password">
+                            <?php } else { ?>
+                                <script>
+                                    jQuery(document).ready(function($) {
+                                        $('#regModal').modal();
+                                    });
+                                </script>
+                                <div id="regModal" class="modal" >
+                                    <div class="modal-header">
+                                        <button class="close" data-dismiss="modal">&times;</button>
+                                        <h3> Authentification </h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="alert alert-error">
+                                            <a class="close span4" href="#" data-dismiss="alert">x</a>Error! Wrong data..
+                                        </div>
+                                        <input type="text" class="span4" placeholder="E-mail" name="login"
+                                               value="<?php if (isset($_GET['login'])) echo $_GET['login'] ?>">
+                                        <input type="password" class="span4" placeholder="Password" name="password">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="#" class="pull-left" id="login_newUser">New User</a>
+                                        <button type="submit" name="submit" class="btn btn-success">Login</button>
+                                    </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <a href="#" class="pull-left" id="login_newUser">New User</a>
-                                    <button type="submit" name="submit" class="btn btn-success">Login</button>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </form>
-                        <?php
-                    }
-                    ?>
-
+                    <?php } ?>
                 </ul>
             </div>
         </div>

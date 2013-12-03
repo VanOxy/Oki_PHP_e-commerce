@@ -82,20 +82,15 @@ switch ($view) {
 
         break;
     case ('login'):
-        $user = $_POST['login'];
-        var_dump($user);
+        $login = $_POST['login'];
         $password = sha1($_POST['password']);
-        var_dump($password);
-        die();
-        if(check_user($connection, $user, $password)){
+        if(check_user($connection, $login, $password)){
             // si l'utilisateur existe
-            $_SESSION['user'] = get_username($connecion, $user);
-            var_dump($_SESSION['user']);
-            die();
+            $_SESSION['user'] = get_username($connection, $login);
+            header('Location: index.php?view=index');
         }else{
-            
+            header('Location: index.php?view=index&login='.$_POST['login']);
         }
-        header('Location: index.php?view=index');
         break;
     case('logout'):
         unset($_SESSION['user']);

@@ -81,6 +81,26 @@ switch ($view) {
     case ('order'):
 
         break;
+    case ('login'):
+        $user = $_POST['login'];
+        var_dump($user);
+        $password = sha1($_POST['password']);
+        var_dump($password);
+        die();
+        if(check_user($connection, $user, $password)){
+            // si l'utilisateur existe
+            $_SESSION['user'] = get_username($connecion, $user);
+            var_dump($_SESSION['user']);
+            die();
+        }else{
+            
+        }
+        header('Location: index.php?view=index');
+        break;
+    case('logout'):
+        unset($_SESSION['user']);
+        header('Location: index.php?view=index');
+        break;
 }
 
 //protection

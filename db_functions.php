@@ -88,4 +88,20 @@ function get_nb_art_by_cat($connection, $cat) {
     return $data['nbrArt']; //on recupere la val
 }
 
+function check_user($connection, $login, $password){
+    $query = "SELECT COUNT(id_client) AS client FROM clients WHERE email = '".$login."' AND password = '".$password."'";
+    $data = exec_query($query, $connection);
+    var_dump($data);
+    die();
+    if($data == 1)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+function get_username($connecion, $login){
+    $query = "SELECT prenom FROM clients WHERE email = '".$login."'";
+    $data = exec_query($query, $connection);
+    return $data;
+}
 ?>

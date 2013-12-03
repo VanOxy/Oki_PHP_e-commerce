@@ -12,7 +12,7 @@
     </head>
 
     <body>
-        <!-- header with search-->
+        <!-- HEADER + LOGO + SEARCH-->
         <div class="navbar navbar-static-top">
             <div class="navbar-inner row" style="background:white;border:0px;">
                 <!-- LOGO -->
@@ -21,6 +21,7 @@
                         <img class="topSpace" src='images/logo.png'>
                     </a>
                 </div>
+                <!-- SEARCH -->
                 <div class="span8 offset2">
                     <form class="navbar-search" action="/search">
                         <div class="input-append" style="margin-top:10px">
@@ -31,9 +32,48 @@
                         </div>
                     </form>
                 </div>
+                <!-- LOGIN -->
                 <ul class="nav pull-right">
-                    <li class="topSpace"><a href="#" id="reg_sign">Register</a></li>
-                    <li class="topSpace"><a href="#" id="reg_sign">Sign In</a></li>
+                    <?php
+                    if (isset($_SESSION['user'])) {
+                        ?>    
+                        <li class="topSpace">
+                            <a href="#" id="reg_sign">Hello, <?= $_SESSION['user'] ?></a>
+                        </li>
+                        <li class="topSpace">
+                            <a href="index.php?view=logout" id="reg_sign">Logout</a>
+                        </li>
+                        <?php
+                    } else {
+                        ?>
+                        <li class="topSpace">
+                            <!-- pour s'addresser à la fenetre modale, dans l'addr du lien -> id du div modal -->
+                            <a href="#regModal" id="reg_sign" data-toggle="modal">
+                                S'authentifier
+                            </a>
+                        </li>
+                        <!-- MODAL LOGIN/REGISTRATION WINDOW -->
+                        <form method="POST" action="index.php?view=login" accept-charset="UTF-8">
+                            <div class="modal hide fade" id="regModal">
+                                <div class="modal-header">
+                                    <button class="close" data-dismiss="modal">&times;</button>
+                                    <h3> Authentification </h3>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" class="span4" placeholder="E-mail" name="login"
+                                           <?php if (isset($_POST['login'])) echo $_POST['login'] ?>>
+                                    <input type="password" class="span4" placeholder="Password" name="password">
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="pull-left" id="login_newUser">New User</a>
+                                    <button type="submit" name="submit" class="btn btn-success">Login</button>
+                                </div>
+                            </div>
+                        </form>
+                        <?php
+                    }
+                    ?>
+
                 </ul>
             </div>
         </div>
@@ -72,7 +112,7 @@
         include ($_SERVER['DOCUMENT_ROOT'] . '/okiStore/views/pages/' . $view . '.php');
         ?>
 
-        <!-- footer -->
+        <!-- FOOTER -->
         <hr>
         <div class="container">
             <p class="muted">Example courtesy <a href="#">Martin Bean</a> and <a href="#">Ryan Fait</a>.</p>

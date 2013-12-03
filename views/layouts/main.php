@@ -66,9 +66,16 @@
                                     </div>
                                     <div class="modal-footer">
                                         <a href="#" class="pull-left" id="login_newUser">New User</a>
-                                        <button type="submit" name="submit" class="btn btn-success">Login</button>
+                                        <button type="submit" name="submit" class="btn btn-success" id="login">Login</button>
                                     </div>
                                 </div>
+                                <script>
+                                    $(document).keypress(function(e) {
+                                        if (e.keyCode == 13) {
+                                            document.getElementById("login").click();
+                                        }
+                                    });
+                                </script>
                             <?php } else { ?>
                                 <script>
                                     jQuery(document).ready(function($) {

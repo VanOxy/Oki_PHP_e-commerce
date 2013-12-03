@@ -54,6 +54,13 @@
                         </li>
                         <!-- MODAL LOGIN/REGISTRATION WINDOW HIDE-->
                         <form method="POST" action="index.php?view=login" accept-charset="UTF-8">
+                            <script>
+                                $(document).keypress(function(e) {
+                                    if (e.keyCode == 13) {
+                                        document.getElementById("login").click();
+                                    }
+                                });
+                            </script>
                             <?php if (!isset($_GET['login'])) { ?>
                                 <div id="regModal" class="modal hide fade">
                                     <div class="modal-header">
@@ -69,13 +76,6 @@
                                         <button type="submit" name="submit" class="btn btn-success" id="login">Login</button>
                                     </div>
                                 </div>
-                                <script>
-                                    $(document).keypress(function(e) {
-                                        if (e.keyCode == 13) {
-                                            document.getElementById("login").click();
-                                        }
-                                    });
-                                </script>
                             <?php } else { ?>
                                 <script>
                                     jQuery(document).ready(function($) {
@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <a href="#" class="pull-left" id="login_newUser">New User</a>
-                                        <button type="submit" name="submit" class="btn btn-success">Login</button>
+                                        <button type="submit" name="submit" class="btn btn-success" id="login">Login</button>
                                     </div>
                                 </div>
                             <?php } ?>

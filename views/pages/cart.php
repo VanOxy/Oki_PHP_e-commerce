@@ -15,10 +15,11 @@
                 </thead>
                 <tbody>
                     <?php
-                    var_dump($_SESSION);
-                        print_r('<br>');
-                        print_r('<br>');
-                        var_dump($_SESSION['cart']);
+                   /* var_dump($_SESSION);
+                    print_r('<br>');
+                    print_r('<br>');
+                    var_dump($_SESSION['cart']);
+                    */
                     //$_SESSION['cart'] --> tableau avec les id's des produits qui ont été ajoutés au panier
                     foreach ($_SESSION['cart'] as $id_prod => $quantity) {
                         //on recupere la ligne du produit concernée

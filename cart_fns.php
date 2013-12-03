@@ -13,7 +13,7 @@ function update_cart() {
         if ($_POST[$id_prod] == '0') {
             unset($_SESSION['cart'][$id_prod]);
         } else {
-            $_SESSION['cart'][$id_prod] = $_POST[$id_prod];
+            $_SESSION['cart'][$id_prod] = (int)$_POST[$id_prod];
         }
     }
 }

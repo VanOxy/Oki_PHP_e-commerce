@@ -72,7 +72,7 @@
                                         <input type="password" class="span4" placeholder="Password" name="password">
                                     </div>
                                     <div class="modal-footer">
-                                        <a href="#" class="pull-left" id="login_newUser">New User</a>
+                                        <a href="index.php?view=registration" class="pull-left" id="login_newUser">New User</a>
                                         <button type="submit" name="submit" class="btn btn-success" id="login">Login</button>
                                     </div>
                                 </div>
@@ -89,14 +89,14 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="alert alert-error">
-                                            <a class="close span4" href="#" data-dismiss="alert">x</a>Error! Wrong data..
+                                            <a class="close span4" href="#" data-dismiss="alert">x</a>Login ou Mot de pass incorrécts...
                                         </div>
                                         <input type="text" class="span4" placeholder="E-mail" name="login"
                                                value="<?php if (isset($_GET['login'])) echo $_GET['login'] ?>">
                                         <input type="password" class="span4" placeholder="Password" name="password">
                                     </div>
                                     <div class="modal-footer">
-                                        <a href="#" class="pull-left" id="login_newUser">New User</a>
+                                        <a href="index.php?view=registration" class="pull-left" id="login_newUser">New User</a>
                                         <button type="submit" name="submit" class="btn btn-success" id="login">Login</button>
                                     </div>
                                 </div>

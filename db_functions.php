@@ -18,7 +18,7 @@ function db_connect() {
     return $connection;
 }
 
-function exec_query($query, $connection){
+function exec_query($query, $connection) {
     try {
         $result = $connection->query($query); //obj PDO
         $res_array = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -88,20 +88,30 @@ function get_nb_art_by_cat($connection, $cat) {
     return $data['nbrArt']; //on recupere la val
 }
 
-function check_user($connection, $login, $password){
-    $query = "SELECT COUNT(id_client) AS client FROM clients WHERE email = '".$login."' AND password = '".$password."'";
+function check_user($connection, $login, $password) {
+    $query = "SELECT COUNT(id_client) AS client FROM clients WHERE email = '" . $login . "' AND password = '" . $password . "'";
     $data = exec_query($query, $connection);
     $data = $data[0];
-    if($data['client'] == 1){
+    if ($data['client'] == 1) {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
 
-function get_username($connection, $login){
-    $query = "SELECT prenom FROM clients WHERE email = '".$login."'";
+function get_username($connection, $login) {
+    $query = "SELECT prenom FROM clients WHERE email = '" . $login . "'";
     $data = exec_query($query, $connection);
     return $data[0]['prenom'];
 }
+
+function insert_user($connection) {
+    //cripter le mot de passe
+    $password = sha1($_POST['password']);
+    $query = "INSERT INTO clients(nom,prenom,adresse,code_postal,email,password) " .
+            "VALUES('{$_POST['surname']}','{$_POST['name']}','{$_POST['address']}'," .
+            "'{$_POST['post_index']}','{$_POST['email']}','{$password}')";
+    $connection->query($query);
+}
+
 ?>

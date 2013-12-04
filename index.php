@@ -109,6 +109,7 @@ switch ($view) {
                //faire la logique d'envoie de e-maol ici
                $_GET['confirm'] = 1; 
                insert_user($connection);
+               send_email($connection);
            } else{
                 $_GET['error'] = 1;
            }

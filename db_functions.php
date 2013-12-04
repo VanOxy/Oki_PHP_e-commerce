@@ -92,11 +92,10 @@ function check_user($connection, $login, $password) {
     $query = "SELECT COUNT(id_client) AS client FROM clients WHERE email = '" . $login . "' AND password = '" . $password . "'";
     $data = exec_query($query, $connection);
     $data = $data[0];
-    if ($data['client'] == 1) {
+    if ($data['client'] == 1)
         return true;
-    } else {
+    else
         return false;
-    }
 }
 
 function get_username($connection, $login) {
@@ -112,6 +111,11 @@ function insert_user($connection) {
             "VALUES('{$_POST['surname']}','{$_POST['name']}','{$_POST['address']}'," .
             "'{$_POST['post_index']}','{$_POST['email']}','{$password}')";
     $connection->query($query);
+}
+
+function send_email($connection){
+    $activation=sha1($_POST['email'].time()); // email + timestamp
+    
 }
 
 ?>

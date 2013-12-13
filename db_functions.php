@@ -105,16 +105,17 @@ function get_username($connection, $login) {
 }
 
 function insert_user($connection) {
-    //cripter le mot de passe
+    //crypter le mot de passe
     $password = sha1($_POST['password']);
-    $query = "INSERT INTO clients(nom,prenom,adresse,code_postal,email,password) " .
+    $activation = md5($_POST['email'] . time()); // email + timestamp
+    //inserer les données du client + le code d'activation
+    $query = "INSERT INTO clients(nom,prenom,adresse,code_postal,email,password,activation) " .
             "VALUES('{$_POST['surname']}','{$_POST['name']}','{$_POST['address']}'," .
-            "'{$_POST['post_index']}','{$_POST['email']}','{$password}')";
+            "'{$_POST['post_index']}','{$_POST['email']}','{$password}','{$activation}')";
     $connection->query($query);
 }
 
-function send_email($connection){
-    $activation=sha1($_POST['email'].time()); // email + timestamp
+function send_email() {
     
 }
 

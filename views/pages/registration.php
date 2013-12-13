@@ -2,9 +2,9 @@
 // on check $_GET['error'](1) et $_GET['confirm'](2) après qu'il ya l'existence de $_POST
 //et ca c'est gère dans index.php --> case(registration)
 // sans $_POST les (1) et (2) ne pourraient pas exister
-
 //on check ça qd l'email n'est pas valide
-if (isset($_GET['error'])) { ?>
+if (isset($_GET['error'])) {
+    ?>
     <div class="container">
         <br>
         <div class="row">
@@ -14,39 +14,45 @@ if (isset($_GET['error'])) { ?>
             </div>
         </div>
         <form method="post" action="index.php?view=registration">
-            <div class="alert alert-error">
-                <p>L'e-mail introduit n'est pas correct!!! Veuillez réessayer...</p>
-            </div>
+            <?php if ($_GET['error'] == 0) { ?>
+                <div class="alert alert-error">
+                    <p>L'utilisateur avec le même e-mail existe déjà. Veuillez entrer un autre e-mail, s'il vous palait.</p>
+                </div>
+            <?php } else { ?>
+                <div class="alert alert-error">
+                    <p>L'e-mail introduit n'est pas correct!!! Veuillez réessayer...</p>
+                </div>
+            <?php } ?>
             <table>
                 <tr>
                     <td>Nom* : </td>
                     <td> </td>
                     <td><input type="text" name="surname" required placeholder="Nom"
-                               value="<?= $_POST['surname']?>"></td>
+                               value="<?= $_POST['surname'] ?>"></td>
                 </tr>
                 <tr>
                     <td>Prenom* : </td>
                     <td> </td>
                     <td> <input type="text" name="name" required placeholder="Prenom"
-                                value="<?= $_POST['name']?>"></td>
+                                value="<?= $_POST['name'] ?>"></td>
                 </tr>
                 <tr>
                     <td>Adresse* : </td>
                     <td> </td>
                     <td><input type="text" name="address" required placeholder="Adresse"
-                               value="<?= $_POST['address']?>"></td>
+                               value="<?= $_POST['address'] ?>"></td>
                 </tr>
                 <tr>
                     <td>Code postal* : </td>
                     <td> </td>
                     <td><input type="text" name="post_index" required placeholder="Code postal"
-                               value="<?= $_POST['post_index']?>"></td>
+                               value="<?= $_POST['post_index'] ?>"></td>
                 </tr>
                 <tr>
                     <td>E-mail* : </td>
                     <td> </td>
                     <td><input type="text" name="email" required placeholder="E-mail"
-                               value="<?= $_POST['email']?>"></td>
+                               value="<?= $_POST['email'] ?>"></td>
                 </tr>
                 <tr>
                     <td>Password* : </td>
@@ -67,18 +73,19 @@ if (isset($_GET['error'])) { ?>
 
         </form>
     </div>
-<?php } elseif(isset ($_GET['confirm'])) { ?>
+<?php } elseif (isset($_GET['confirm'])) { ?>
 
-<!-- ici on fait la confirmation par e-mail le design-->
+    <!-- ici on fait la confirmation par e-mail le design-->
 
-<div class="alert alert-success">
-    <h4>Success</h4>
-    <p>
-        <a href="index.php">Come back</a>
-    </p>
-</div>
+    <div class="alert alert-success">
+        <h4>Success</h4>
+        <p>
+            <a href="index.php">Come back</a>
+        </p>
+    </div>
 
-<?php } else {
+    <?php
+} else {
     //on affiche le formulaire de depart, tt vide
     ?>
     <div class="container">

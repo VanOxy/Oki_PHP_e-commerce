@@ -104,15 +104,20 @@ switch ($view) {
         //**********  2  ***************
         //après la validation du formulaire
         //on repasse par ici et on check si e-mail est valide
+        //et aussi s'il n'est pas déjà dans la base de données
         if (isset($_POST['email'])) {
-           if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-               //faire la logique d'envoie de e-maol ici
-               $_GET['confirm'] = 1; 
-               insert_user($connection);
-               send_email($connection);
-           } else{
-                $_GET['error'] = 1;
-           }
+            if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) { //filtre e-mail
+                if (get_username($connection, $_POST['email'])) {   //check si déja dans la BD
+                    $_GET['error'] = 0; // l'utilisateur avc mm e-mail existe déjà
+                } else {
+                    //faire la logique d'envoie de e-maol ici
+                    $_GET['confirm'] = 1;
+                    insert_user($connection);
+                    //send_email();
+                }
+            } else {
+                $_GET['error'] = 1; //email incorrect
+            }
         }
         break;
 }

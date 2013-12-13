@@ -19,7 +19,7 @@
                     <br>
                     <div style="margin-left: 5px;">
                         <h4><?= $row['title'] ?></h4>
-                        <h5>Prix : € <?= $row['price'] ?></h5>
+                        <h5>Prix : € <?= number_format($row['price'], 2) ?></h5>
                     </div>
                     <!--BUTTONS-->
                     <div>

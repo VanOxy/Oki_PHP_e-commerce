@@ -21,7 +21,7 @@
             <br>
             <!--prix-->
             <div>
-                <h5>Prix : <?= $product['price'] ?> €</h5>
+                <h5>Prix : <?= number_format($product['price'], 2) ?> €</h5>
             </div>
         </div>
     </div>

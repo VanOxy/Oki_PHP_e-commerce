@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="alert alert-error">
-                                            <a class="close span4" href="#" data-dismiss="alert">x</a>Login ou Mot de pass incorrécts...
+                                            <a class="close span4" href="#" data-dismiss="alert">x</a>Login ou le Mot de pass incorrects...
                                         </div>
                                         <input type="text" class="span4" placeholder="E-mail" name="login"
                                                value="<?php if (isset($_GET['login'])) echo $_GET['login'] ?>">

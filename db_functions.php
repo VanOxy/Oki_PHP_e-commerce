@@ -104,6 +104,15 @@ function get_username($connection, $login) {
     return $data[0]['prenom'];
 }
 
+function email_already_exists($connection, $email){
+    $query = "SELECT email FROM clients WHERE email = '" . $email . "'";
+    $data = exec_query($query, $connection);
+    if(isset($data[0]['email']))
+        return TRUE;
+    else
+        return FALSE;
+}
+
 function insert_user($connection) {
     //crypter le mot de passe
     $password = sha1($_POST['password']);

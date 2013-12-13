@@ -18,7 +18,7 @@ if (isset($_GET['error'])) {
                 <div class="alert alert-error">
                     <p>L'utilisateur avec le même e-mail existe déjà. Veuillez entrer un autre e-mail, s'il vous palait.</p>
                 </div>
-            <?php } else { ?>
+            <?php } elseif ($_GET['error'] == 1){ ?>
                 <div class="alert alert-error">
                     <p>L'e-mail introduit n'est pas correct!!! Veuillez réessayer...</p>
                 </div>

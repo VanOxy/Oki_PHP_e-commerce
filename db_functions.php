@@ -89,7 +89,9 @@ function get_nb_art_by_cat($connection, $cat) {
 }
 
 function check_user($connection, $login, $password) {
-    $query = "SELECT COUNT(id_client) AS client FROM clients WHERE email = '" . $login . "' AND password = '" . $password . "'";
+    //******on check si l'user existe *******
+    $query = "SELECT COUNT(id_client) AS client FROM clients WHERE email = '" . $login 
+            . "' AND password = '" . $password . "' AND activation = '1'";
     $data = exec_query($query, $connection);
     $data = $data[0];
     if ($data['client'] == 1)
@@ -104,19 +106,18 @@ function get_username($connection, $login) {
     return $data[0]['prenom'];
 }
 
-function email_already_exists($connection, $email){
+function email_already_exists($connection, $email) {
     $query = "SELECT email FROM clients WHERE email = '" . $email . "'";
     $data = exec_query($query, $connection);
-    if(isset($data[0]['email']))
+    if (isset($data[0]['email']))
         return TRUE;
     else
         return FALSE;
 }
 
-function insert_user($connection) {
+function insert_user($connection,$activation) {
     //crypter le mot de passe
     $password = sha1($_POST['password']);
-    $activation = md5($_POST['email'] . time()); // email + timestamp
     //inserer les données du client + le code d'activation
     $query = "INSERT INTO clients(nom,prenom,adresse,code_postal,email,password,activation) " .
             "VALUES('{$_POST['surname']}','{$_POST['name']}','{$_POST['address']}'," .
@@ -124,8 +125,13 @@ function insert_user($connection) {
     $connection->query($query);
 }
 
-function send_email() {
-    
+function send_email($activation) {
+    $subject    = "Confirez votre inscription";
+    $message = "Bonjour! On vous remercies pour l'inscription sur www.okistore.com \n"
+            . "Votre login:    " . $_POST['email'] . "\n
+            Cliquez sur le lien, pour activer votre compte :\n
+            http://localhost/okiStore/activation.php?login=" . $_POST['email'] . "&code=" . $activation;
+    var_dump($_POST['email']);
+    mail($_POST['email'], $subject, $message, "Content-type:text/plane;    Charset=windows-1251\r\n"); //envoyer e-mail
 }
-
 ?>

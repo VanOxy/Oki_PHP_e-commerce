@@ -112,8 +112,9 @@ switch ($view) {
                 } else {
                     //faire la logique d'envoie de e-maol ici
                     $_GET['confirm'] = 1;
-                    insert_user($connection);
-                    //send_email();
+                    $activation = md5($_POST['email'] . time()); // email + timestamp
+                    insert_user($connection, $activation);
+                    send_email($activation);
                 }
             } else {
                 $_GET['error'] = 1; //email incorrect

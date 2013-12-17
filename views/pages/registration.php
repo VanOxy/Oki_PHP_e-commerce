@@ -1,4 +1,7 @@
 <?php
+//$_GET['error'] == 0 --> l'utilisateur avc mm e-mail existe déjà
+//$_GET['error'] == 1 --> format email incorrect
+//
 // on check $_GET['error'](1) et $_GET['confirm'](2) après qu'il ya l'existence de $_POST
 //et ca c'est gère dans index.php --> case(registration)
 // sans $_POST les (1) et (2) ne pourraient pas exister
@@ -18,7 +21,7 @@ if (isset($_GET['error'])) {
                 <div class="alert alert-error">
                     <p>L'utilisateur avec le même e-mail existe déjà. Veuillez entrer un autre e-mail, s'il vous palait.</p>
                 </div>
-            <?php } elseif ($_GET['error'] == 1){ ?>
+            <?php } elseif ($_GET['error'] == 1) { ?>
                 <div class="alert alert-error">
                     <p>L'e-mail introduit n'est pas correct!!! Veuillez réessayer...</p>
                 </div>
@@ -73,18 +76,37 @@ if (isset($_GET['error'])) {
 
         </form>
     </div>
-<?php } elseif (isset($_GET['confirm'])) { ?>
-
-    <!-- ici on fait la confirmation par e-mail le design-->
-
-    <div class="alert alert-success">
-        <h4>Success</h4>
-        <p>
-            <a href="index.php">Come back</a>
-        </p>
-    </div>
-
     <?php
+//  ici on fait la confirmation par e-mail le design
+} elseif (isset($_GET['confirm'])) {
+    if ($_GET['confirm'] == 1) {
+        //cas du simple enregistrement sans la confirmation
+        ?>
+        <br>
+        <div class="alert alert-success">
+            <h4>
+                Votre compte a bien été enregistré. <br>
+                Les données necéssaires pour l'activation ont étés  envoyés sur votre boite e-mail.
+            </h4>
+            <p>
+                <a href="index.php">Retourner à la page d'acceil.</a>
+            </p>
+        </div>
+        <?php
+    } elseif ($_GET['confirm'] == 2) {
+        //après avoir confirmé l'e-mail
+        ?>
+        <br>
+        <div class="alert alert-success">
+            <h4>
+                Votre compte a été activé.
+            </h4>
+            <p>
+                <a href="index.php">Retourner à la page d'acceil.</a>
+            </p>
+        </div>
+        <?php
+    }
 } else {
     //on affiche le formulaire de depart, tt vide
     ?>

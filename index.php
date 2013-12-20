@@ -124,7 +124,8 @@ switch ($view) {
 }
 
 //protection
-$arr = array('index', 'cat', 'product', 'cart', 'add_to_cart', 'update_cart', 'order', 'registration');
+$arr = array('index', 'cat', 'product', 'cart', 'add_to_cart', 'update_cart', 'order', 'registration', 'paypalSuccess',
+        'paypalCancel');
 if (!in_array($view, $arr))
     die("ERROR 404<br>Cette adrese n'existe pas...!!! o_O");
 
